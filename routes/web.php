@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,7 +13,15 @@ Route::get('/about', function () {
 
 
 Route::get('/blog', function () {
+    return view('blogs', ['title' => 'Blog']);
+});
+
+Route::get('/blog/{blog:slug}', function () {
     return view('blog', ['title' => 'Blog']);
+});
+
+Route::get('/author/{user}', function (User $user) {
+    return view('blogs', ['title' => 'Articles by ' . $user->name]);
 });
 
 
